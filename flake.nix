@@ -12,9 +12,7 @@
 
       skeen = pkgs.stdenv.mkDerivation {
         name = "skeen";
-        # version = "0.1.0";
         src = ./.;
-
         buildPhase = ''
           ${pkgs.zip}/bin/zip -r build/skeen.osk . -x "build/*" ".git/*"
         '';
