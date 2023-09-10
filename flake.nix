@@ -2,7 +2,7 @@
   description = "skeen";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     utils.url = "github:numtide/flake-utils";
   };
 
@@ -12,13 +12,10 @@
 
       skeen = pkgs.stdenv.mkDerivation {
         name = "skeen";
-        src = ./.;
-        buildPhase = ''
-          ${pkgs.zip}/bin/zip -r build/skeen.osk . -x "build/*" ".git/*"
-        '';
+        src = ./skeen;
         installPhase = ''
           mkdir -p $out
-          cp build/skeen.osk $out/skeen.osk
+          ${pkgs.zip}/bin/zip -r $out/skeen.osk .
         '';
       };
     in
