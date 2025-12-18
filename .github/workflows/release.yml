@@ -7,6 +7,8 @@ on:
 jobs:
   release:
     runs-on: ubuntu-22.04
+    permissions:
+      contents: write
     steps:
     - uses: actions/checkout@v4
     - uses: cachix/install-nix-action@v30
@@ -17,3 +19,8 @@ jobs:
       with:
         name: skeen-osk
         path: result/skeen.osk
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v2
+      with:
+        files: result/skeen.osk
+        generate_release_notes: true
